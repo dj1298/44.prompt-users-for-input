@@ -51,6 +51,7 @@ namespace Microsoft.BotBuilderSamples
             switch (flow.LastQuestionAsked)
             {
                 case ConversationFlow.Question.None:
+                    //test
                     await turnContext.SendActivityAsync("Let's get started. What is your name?");
                     flow.LastQuestionAsked = ConversationFlow.Question.Name;
                     break;
