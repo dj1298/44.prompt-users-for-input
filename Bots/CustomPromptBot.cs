@@ -74,8 +74,8 @@ namespace Microsoft.BotBuilderSamples
                     {
                         profile.Age = age;
                         await turnContext.SendActivityAsync($"I have your age as {profile.Age}.");
-                        await turnContext.SendActivityAsync("When is your flight?");
-                        flow.LastQuestionAsked = ConversationFlow.Question.Date;
+                        await turnContext.SendActivityAsync("What is your destination?");
+                        flow.LastQuestionAsked = ConversationFlow.Question.Destination;
                         break;
                     }
                     else
@@ -83,7 +83,20 @@ namespace Microsoft.BotBuilderSamples
                         await turnContext.SendActivityAsync(message ?? "I'm sorry, I didn't understand that.");
                         break;
                     }
-
+                case ConversationFlow.Question.Destination:
+                    if (ValidateDate(input, out string destination, out message))
+                    {
+                        profile.Destination = destination;
+                        await turnContext.SendActivityAsync($"When is your flight?");
+                        flow.LastQuestionAsked = ConversationFlow.Question.Date;
+                        profile = new UserProfile();
+                        break;
+                    }
+                    else
+                    {
+                        await turnContext.SendActivityAsync(message ?? "I'm sorry, I didn't understand that.");
+                        break;
+                    }
                 case ConversationFlow.Question.Date:
                     if (ValidateDate(input, out string date, out message))
                     {
@@ -100,6 +113,8 @@ namespace Microsoft.BotBuilderSamples
                         await turnContext.SendActivityAsync(message ?? "I'm sorry, I didn't understand that.");
                         break;
                     }
+
+                
             }
         }
 

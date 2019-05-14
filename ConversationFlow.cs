@@ -12,6 +12,7 @@ namespace Microsoft.BotBuilderSamples
     {
         Name,
         Age,
+        Destination,
         Date,
         None, // Our last action did not involve a question.
     }

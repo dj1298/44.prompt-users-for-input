@@ -12,5 +12,7 @@ namespace Microsoft.BotBuilderSamples
         public int? Age { get; set; }
 
         public string Date { get; set; }
+
+        public string Destination { get; set; }
     }
 }
