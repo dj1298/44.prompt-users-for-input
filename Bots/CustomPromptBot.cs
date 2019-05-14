@@ -84,7 +84,7 @@ namespace Microsoft.BotBuilderSamples
                         break;
                     }
                 case ConversationFlow.Question.Destination:
-                    if (ValidateDate(input, out string destination, out message))
+                    if (ValidateDestination(input, out string destination, out message))
                     {
                         profile.Destination = destination;
                         await turnContext.SendActivityAsync($"When is your flight?");
@@ -126,6 +126,23 @@ namespace Microsoft.BotBuilderSamples
             if (string.IsNullOrWhiteSpace(input))
             {
                 message = "Please enter a name that contains at least one character.";
+            }
+            else
+            {
+                name = input.Trim();
+            }
+
+            return message is null;
+        }
+
+        private static bool ValidateDestination(string input, out string name, out string message)
+        {
+            name = null;
+            message = null;
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                message = "Please enter a destination that contains at least one character.";
             }
             else
             {
