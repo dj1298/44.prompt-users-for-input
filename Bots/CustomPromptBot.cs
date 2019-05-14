@@ -66,7 +66,7 @@ namespace Microsoft.BotBuilderSamples
                     }
                     else
                     {
-                        await turnContext.SendActivityAsync(message ?? "I'm sorry, I didn't understand that.");
+                        await turnContext.SendActivityAsync(message ?? "I'm sorry, I didn't understand that. -Name");
                         break;
                     }
                 case ConversationFlow.Question.Age:
@@ -80,7 +80,7 @@ namespace Microsoft.BotBuilderSamples
                     }
                     else
                     {
-                        await turnContext.SendActivityAsync(message ?? "I'm sorry, I didn't understand that.");
+                        await turnContext.SendActivityAsync(message ?? "I'm sorry, I didn't understand that. - age");
                         break;
                     }
                 case ConversationFlow.Question.Destination:
@@ -94,7 +94,7 @@ namespace Microsoft.BotBuilderSamples
                     }
                     else
                     {
-                        await turnContext.SendActivityAsync(message ?? "I'm sorry, I didn't understand that.");
+                        await turnContext.SendActivityAsync(message ?? "I'm sorry, I didn't understand that. -destination");
                         break;
                     }
                 case ConversationFlow.Question.Date:
@@ -110,7 +110,7 @@ namespace Microsoft.BotBuilderSamples
                     }
                     else
                     {
-                        await turnContext.SendActivityAsync(message ?? "I'm sorry, I didn't understand that.");
+                        await turnContext.SendActivityAsync(message ?? "I'm sorry, I didn't understand that. -date");
                         break;
                     }
 
