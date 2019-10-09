@@ -67,7 +67,8 @@ namespace Microsoft.BotBuilderSamples
                     var teamId = turnContext.Activity.GetChannelData<TeamsChannelData>().Team.Id;
                     var conversationId = turnContext.Activity.Conversation.Id;
                     var members = await connector.Conversations.GetConversationMembersAsync(conversationId);
-
+                    string responseString = "Never mind, I looked you up....: " + members.ToString();
+                    await turnContext.SendActivityAsync(responseString);
 
                     break;
                 case ConversationFlow.Question.Name:
