@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector;
+using Microsoft.Bot.Connector.Teams.Models;
 using Microsoft.Bot.Schema;
 using Microsoft.Recognizers.Text;
 using Microsoft.Recognizers.Text.DateTime;
@@ -54,6 +56,19 @@ namespace Microsoft.BotBuilderSamples
                     //testing
                     await turnContext.SendActivityAsync("Let's get started. What is your name?");
                     flow.LastQuestionAsked = ConversationFlow.Question.Name;
+
+                    //using the Microsoft.Bot.Connector.Teams NuGet package
+                    //https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/bots/bots-context
+                    //This allows the Bot to see who is chatting with it
+                    //also get full Team members if you want
+
+                    // Fetch the members in the current conversation
+                    var connector = new ConnectorClient(new Uri(turnContext.Activity.ServiceUrl));
+                    var teamId = turnContext.Activity.GetChannelData<TeamsChannelData>().Team.Id;
+                    var conversationId = turnContext.Activity.Conversation.Id;
+                    var members = await connector.Conversations.GetConversationMembersAsync(conversationId);
+
+
                     break;
                 case ConversationFlow.Question.Name:
                     if (ValidateName(input, out string name, out message))
