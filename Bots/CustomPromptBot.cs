@@ -57,14 +57,28 @@ namespace Microsoft.BotBuilderSamples
                     await turnContext.SendActivityAsync("Let's get started. What is your name?");
                     flow.LastQuestionAsked = ConversationFlow.Question.Name;
 
+                    string responseString = "I looked you up....: " + turnContext.Activity.From.Name;
+                    await turnContext.SendActivityAsync(responseString);
+
+
                     //using the Microsoft.Bot.Connector.Teams NuGet package
                     //https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/bots/bots-context
                     //This allows the Bot to see who is chatting with it
                     //also get full Team members if you want
 
                     // Fetch the members in the current conversation
-                    string responseString = "I looked you up....: " + turnContext.Activity.From.Name;
-                    await turnContext.SendActivityAsync(responseString);
+                    var connector = new ConnectorClient(new Uri(turnContext.Activity.ServiceUrl));
+                    var teamId = turnContext.Activity.Id;
+
+                    //This should fetch the team roster
+                    var allTeamMembers = await connector.Conversations.GetConversationMembersAsync(teamId);
+
+                    //This shoud fetch the user profile in a personal or group chat
+                    //need to pass in the conversationID instead of teamID as above
+                    var conversationId = turnContext.Activity.Conversation.Id;
+                    var  groupChatMembers = await connector.Conversations.GetConversationMembersAsync(conversationId);
+
+                    await turnContext.SendActivityAsync("test");
 
                     break;
                 case ConversationFlow.Question.Name:
