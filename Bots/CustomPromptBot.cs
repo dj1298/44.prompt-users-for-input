@@ -78,7 +78,7 @@ namespace Microsoft.BotBuilderSamples
                     var conversationId = turnContext.Activity.Conversation.Id;
                     var  groupChatMembers = await connector.Conversations.GetConversationMembersAsync(conversationId);
 
-                    await turnContext.SendActivityAsync("test");
+                    //await turnContext.SendActivityAsync("test");
 
                     break;
                 case ConversationFlow.Question.Name:
