@@ -63,11 +63,7 @@ namespace Microsoft.BotBuilderSamples
                     //also get full Team members if you want
 
                     // Fetch the members in the current conversation
-                    var connector = new ConnectorClient(new Uri(turnContext.Activity.ServiceUrl));
-                    //var teamId = turnContext.Activity.GetChannelData<TeamsChannelData>().Team.Id;
-                    //var conversationId = turnContext.Activity.Conversation.Id;
-                    //var members = await connector.Conversations.GetConversationMembersAsync(conversationId);
-                    string responseString = "Never mind, I looked you up....: " + turnContext.Activity.From.Name;
+                    string responseString = "I looked you up....: " + turnContext.Activity.From.Name;
                     await turnContext.SendActivityAsync(responseString);
 
                     break;
